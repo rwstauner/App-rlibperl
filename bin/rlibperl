@@ -1,0 +1,31 @@
+#!/bin/sh
+#! -*-perl-*- # vim: set ft=perl:
+eval 'exec perl -x -wS $0 ${1+"$@"}'
+  if 0;
+
+# PODNAME: rlibperl
+# ABSTRACT: Execute perl prepending relative lib to @INC
+
+use strict;
+use warnings;
+use FindBin;    # core
+use File::Spec; # core
+
+# __FILE__ can be relative, use FindBin to make sure we get enough path to go up
+
+# FindBin::Bin is a dir, so set $no_file to true for reliability
+my ($vol, $dirs, $file) = File::Spec->splitpath($FindBin::Bin, 1);
+my @dir = File::Spec->splitdir($dirs);
+
+# when installed by local::lib this script should be in $locallib/bin.
+# we want to add $locallib/lib/perl5 to @INC
+# so replace the trailing 'bin' with 'lib/perl5'
+# NOTE: alternatively we could use this lib ourselves, use local::lib "$dir", and query it to get the dirs to inc.
+splice @dir, -1, 1, qw(lib perl5);
+
+# explicitly pass empty file, we only want the dir
+my $inc = File::Spec->catpath($vol, File::Spec->catdir(@dir), '');
+
+# re-invoke perl with the the local::lib dir prepended
+exec($^X, '-I' . $inc, @ARGV);
+die "Failed to execute '$^X': $!";
