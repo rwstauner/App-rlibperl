@@ -26,6 +26,14 @@ splice @dir, -1, 1, qw(lib perl5);
 # explicitly pass empty file, we only want the dir
 my $inc = File::Spec->catpath($vol, File::Spec->catdir(@dir), '');
 
+# see perldoc description of perlvar $^X
+use Config;
+my $perl = $Config{perlpath};
+if ($^O ne 'VMS') {
+  $perl .= $Config{_exe}
+    unless $perl =~ m/$Config{_exe}$/i;
+}
+
 # re-invoke perl with the the local::lib dir prepended
-exec($^X, '-I' . $inc, @ARGV);
-die "Failed to execute '$^X': $!";
+exec($perl, '-I' . $inc, @ARGV);
+die "Failed to execute '$perl': $!";
