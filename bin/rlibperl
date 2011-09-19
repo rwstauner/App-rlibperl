@@ -34,6 +34,9 @@ if ($^O ne 'VMS') {
     unless $perl =~ m/$Config{_exe}$/i;
 }
 
+# put current bin in path so perl -S will find it
+$ENV{PATH} = $FindBin::Bin . $Config{path_sep} . $ENV{PATH};
+
 # re-invoke perl with the the local::lib dir prepended
 exec($perl, '-I' . $inc, @ARGV);
 die "Failed to execute '$perl': $!";
