@@ -1,5 +1,6 @@
 #!/bin/sh
-#! -*-perl-*- # vim: set ft=perl:
+# vim: set ts=2 sts=2 sw=2 expandtab smarttab filetype=perl:
+#! -*-perl-*-
 eval 'exec perl -x -wS $0 ${1+"$@"}'
   if 0;
 
@@ -9,25 +10,42 @@ eval 'exec perl -x -wS $0 ${1+"$@"}'
 use strict;
 use warnings;
 use FindBin;    # core
-use File::Spec; # core
+use File::Spec::Functions qw( catdir catpath splitdir splitpath ); # core
+use Config;     # core
 
 # __FILE__ can be relative, use FindBin to make sure we get enough path to go up
 
 # FindBin::Bin is a dir, so set $no_file to true for reliability
-my ($vol, $dirs, $file) = File::Spec->splitpath($FindBin::Bin, 1);
-my @dir = File::Spec->splitdir($dirs);
+my ($vol, $dirs, $file) = splitpath($FindBin::Bin, 1);
+my @base = splitdir($dirs);
 
-# when installed by local::lib this script should be in $locallib/bin.
-# we want to add $locallib/lib/perl5 to @INC
-# so replace the trailing 'bin' with 'lib/perl5'
-# NOTE: alternatively we could use this lib ourselves, use local::lib "$dir", and query it to get the dirs to inc.
-splice @dir, -1, 1, qw(lib perl5);
+# go up from 'bin' dir ($path/bin/../lib)
+# TODO: instead of this arbitrary (conventional) regexp,
+# should we just test if any of the desired dir's exist at either level?
+pop @base if $base[-1] =~ /^(bin|scripts?)/i;
 
-# explicitly pass empty file, we only want the dir
-my $inc = File::Spec->catpath($vol, File::Spec->catdir(@dir), '');
+my @inc = do {
+  my %current = map { ($_ => 1) } @INC; # uniq
+  grep { -d $_ && !exists($current{$_}) }
+  map  { catpath($vol, catdir(@base, @$_), '') }
+  (
+    # TODO: separate these into "sets" (by more than just comments)
+    # TODO: and stop at the first one.  also put $base back and try again if none found
+
+    # local::lib uses $locallib/lib/perl5 and $locallib/lib/perl5/$archname
+    [qw(lib perl5), $Config{archname}],
+    [qw(lib perl5)],
+    # dists/webapps/etc tend to just use ./lib/
+    [qw(lib)],
+    # built dists use blib/lib and blib/arch (see `prove -b`)
+    [qw(blib lib )],
+    [qw(blib arch)],
+    # or maybe just blib (for dists building xs (see Devel::Local))
+    [qw(blib)],
+  );
+};
 
 # see perldoc description of perlvar $^X
-use Config;
 my $perl = $Config{perlpath};
 if ($^O ne 'VMS') {
   $perl .= $Config{_exe}
@@ -37,6 +55,9 @@ if ($^O ne 'VMS') {
 # put current bin in path so perl -S will find it
 $ENV{PATH} = $FindBin::Bin . $Config{path_sep} . $ENV{PATH};
 
-# re-invoke perl with the the local::lib dir prepended
-exec($perl, '-I' . $inc, @ARGV);
+# re-invoke perl with the the lib dirs prepended
+exec($perl, (map { '-I' . $_ } @inc), @ARGV);
 die "Failed to execute '$perl': $!";
+
+# SEE ALSO: local::lib, Devel::Local, ylib, rlib
+# IDEA: similar to ylib, could read a ~/.file for extra paths to include, possibly multiple keyed on location of script
