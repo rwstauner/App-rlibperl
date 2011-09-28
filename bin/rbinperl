@@ -20,4 +20,8 @@ my $perl = catpath($vol, $dirs, 'rlibperl');
 exec($perl, '-S', @ARGV);
 die "Failed to execute '$perl': $!";
 
-# SEE ALSO: App::rlibperl
+=head1 SEE ALSO
+
+=for :list
+* L<App::rbinperl> for documentation
+* L<App::rlibperl> used to discover relative lib directories

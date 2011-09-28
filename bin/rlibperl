@@ -59,5 +59,10 @@ $ENV{PATH} = $FindBin::Bin . $Config{path_sep} . $ENV{PATH};
 exec($perl, (map { '-I' . $_ } @inc), @ARGV);
 die "Failed to execute '$perl': $!";
 
-# SEE ALSO: local::lib, Devel::Local, ylib, rlib
 # IDEA: similar to ylib, could read a ~/.file for extra paths to include, possibly multiple keyed on location of script
+
+=head1 SEE ALSO
+
+=for :list
+* L<App::rlibperl> for documentation
+* L<App::rbinperl> which uses this script to execute another perl script in the same dir
