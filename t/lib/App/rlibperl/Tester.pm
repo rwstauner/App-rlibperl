@@ -23,6 +23,7 @@ our @EXPORT = qw(
   make_file
   make_script
   named_tree
+  tempdir
 );
 
 our @scripts = qw(
