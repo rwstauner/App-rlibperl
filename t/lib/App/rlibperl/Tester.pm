@@ -15,6 +15,8 @@ use Exporter;      # core
 our @ISA    = qw( Exporter );
 our @EXPORT = qw(
   @scripts
+  catdir
+  catfile
   get_inc
   named_tree
 );
