@@ -13,8 +13,15 @@ use Exporter;      # core
 
 our @ISA    = qw( Exporter );
 our @EXPORT = qw(
+  get_inc
   named_tree
 );
+
+sub get_inc {
+  my $perl = shift || $^X;
+  local $ENV{PERL5LIB};
+  return split(/\t/, qx/$perl -e "\$, = qq[\\t]; print \@INC;"/);
+}
 
 sub named_tree {
   my ($name) = @_;
