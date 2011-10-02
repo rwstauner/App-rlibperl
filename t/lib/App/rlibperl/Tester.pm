@@ -106,4 +106,5 @@ sub make_file {
 sub make_script {
   my $file = make_file(@_);
   chmod 0755, $file;
+  return $file;
 }
