@@ -31,6 +31,6 @@ SCRIPT
   is(
     $out,
     "testing rbinperl\t1.234",
-    'script used lib and returned expected output'
+    "script used lib and returned expected output for '$structure'"
   );
 }

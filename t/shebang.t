@@ -53,6 +53,6 @@ SCRIPT
   is(
     qx/$script/,
     'bar.nertz.',
-    'rbinperl used as shebang to invoke custom interpreter'
+    "rbinperl used as shebang to invoke custom interpreter for '$structure'"
   );
 }
