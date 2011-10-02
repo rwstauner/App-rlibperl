@@ -4,7 +4,6 @@ use warnings;
 use lib 't/lib';
 use App::rlibperl::Tester;
 use Test::More;
-use Config; # core
 
 my @tests = (
   ['local::lib' => [ [qw(lib perl5), $Config{archname}], [qw(lib perl5)] ] ],

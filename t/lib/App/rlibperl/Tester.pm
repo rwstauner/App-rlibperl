@@ -14,6 +14,7 @@ use Exporter;      # core
 
 our @ISA    = qw( Exporter );
 our @EXPORT = qw(
+  %Config
   @scripts
   catdir
   catfile
