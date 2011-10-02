@@ -16,6 +16,7 @@ our @ISA    = qw( Exporter );
 our @EXPORT = qw(
   %Config
   @scripts
+  @structures
   catdir
   catfile
   get_inc
@@ -27,6 +28,12 @@ our @EXPORT = qw(
 our @scripts = qw(
   rlibperl
   rbinperl
+);
+
+our @structures = qw(
+  local::lib
+  same
+  parent
 );
 
 sub get_inc {
