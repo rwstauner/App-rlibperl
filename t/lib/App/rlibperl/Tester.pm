@@ -19,6 +19,8 @@ our @EXPORT = qw(
   catdir
   catfile
   get_inc
+  make_file
+  make_script
   named_tree
 );
 
@@ -77,4 +79,21 @@ sub named_tree {
     root => $dir,
     %scripts,
   };
+}
+
+sub make_file {
+  my ($path, $text) = @_;
+  my $file = ref($path) eq 'ARRAY' ? catfile(@$path) : $path;
+  open my $fh, '>', $file
+    or die "Failed to open $file for writing: $!";
+  print $fh $text
+    or die "Failed to write to $file: $!";
+  close $fh
+    or die "Failed to close $file: $!";
+  return $file;
+}
+
+sub make_script {
+  my $file = make_file(@_);
+  chmod 0755, $file;
 }
