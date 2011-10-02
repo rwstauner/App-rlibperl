@@ -39,35 +39,36 @@ sub named_tree {
   my ($name) = @_;
   my $dir = tempdir( CLEANUP => 1 );
 
-  my ($bin, $arch, $lib);
+  my %subdirs;
   if ( $name eq 'local::lib' ) {
-    $bin  = [qw(bin)];
-    $arch = [qw(lib perl5), $Config{archname}];
-    $lib  = [qw(lib perl5)];
+    $subdirs{bin}  = [qw(bin)];
+    $subdirs{arch} = [qw(lib perl5), $Config{archname}];
+    $subdirs{lib}  = [qw(lib perl5)];
   }
   elsif ( $name eq 'parent' ) {
-    $bin  = [qw(bin)];
-    $lib  = [qw(lib)];
+    $subdirs{bin}  = [qw(bin)];
+    $subdirs{lib}  = [qw(lib)];
   }
   elsif ( $name eq 'same' ) {
-    $lib  = [qw(lib)];
+    $subdirs{lib}  = [qw(lib)];
   }
   else {
     die qq[Don't know how to build tree for '$name'];
   }
-  $bin ||= [];
-  $arch ||= $lib;
+  $subdirs{bin}  ||= [];
+  $subdirs{arch} ||= $subdirs{lib};
 
-  # $arch is a subdir (or equal to $lib)
-  mkpath($_)
-    for map { catdir($dir, @$_) } $bin, $arch;
+  $subdirs{$_} = catdir($dir, @{$subdirs{$_}})
+    for keys %subdirs;
+
+  mkpath([values %subdirs]);
 
   my $source = ['bin'];
   unshift @$source, 'blib'
     if -d 'blib';
 
   # TODO: $ext = '.pl' if $^O eq 'MSWin32' ?
-  my %scripts = map { ($_ => catfile($dir, @$bin, $_)) }
+  my %scripts = map { ($_ => catfile($subdirs{bin}, $_)) }
     @scripts;
 
   copy( catfile(@$source, $_), $scripts{$_} )
@@ -77,6 +78,7 @@ sub named_tree {
 
   return {
     root => $dir,
+    %subdirs,
     %scripts,
   };
 }
