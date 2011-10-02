@@ -68,6 +68,8 @@ sub named_tree {
   copy( catfile(@$source, $_), $scripts{$_} )
     for keys %scripts;
 
+  chmod 0755, values %scripts;
+
   return {
     root => $dir,
     %scripts,
