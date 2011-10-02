@@ -20,14 +20,25 @@ plan tests => scalar @structures;
 foreach my $structure ( @structures ) {
   my $tree = named_tree( $structure );
 
+  make_file([$tree->{lib}, 'Silly_Interp.pm'], <<MOD);
+package # no_index
+  Silly_Interp;
+sub parse {
+  local \$_ = shift;
+  return "bar." if /foo/;
+  return "nertz." if /narf/;
+}
+1;
+MOD
+
   my $interp = 'sillyinterp';
   make_script([$tree->{bin}, $interp], <<SCRIPT);
 #!$^X
 use strict;
 use warnings;
+use Silly_Interp;
 while(<>){
-  print "bar." if /foo/;
-  print "nertz." if /narf/;
+  print Silly_Interp::parse(\$_);
 }
 SCRIPT
 
