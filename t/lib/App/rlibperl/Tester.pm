@@ -1,3 +1,4 @@
+# vim: set ts=2 sts=2 sw=2 expandtab smarttab:
 package # no_index
   App::rlibperl::Tester;
 
@@ -47,6 +48,7 @@ sub named_tree {
     $lib  = [qw(lib)];
   }
   else {
+    die qq[Don't know how to build tree for '$name'];
   }
   $bin ||= [];
   $arch ||= $lib;
@@ -66,7 +68,6 @@ sub named_tree {
   copy( catfile(@$source, $_), $scripts{$_} )
     for keys %scripts;
 
-  print qx/ls -alFR $dir/;
   return {
     root => $dir,
     %scripts,
