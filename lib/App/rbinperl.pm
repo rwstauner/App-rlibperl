@@ -14,8 +14,7 @@ to execute which don't have your full environment.
 
 Instead of:
 
-  * * * * * perl -I/home/username/perl5/lib/perl5/x86_64-linux \
-                 -I/home/username/perl5/lib/perl5 \
+  * * * * * perl -I/home/username/perl5/lib/perl5 \
                    /home/username/perl5/bin/somescript
 
 Do:
@@ -58,7 +57,7 @@ via L<local::lib> your directory tree will look something like this:
   ${root}/bin/rbinperl
   ${root}/bin/made-up-script
   ${root}/lib/perl5/${modules}
-  ${root}/lib/perl5/${archname}/${xs_modules}
+  ${root}/lib/perl5/${archname}/${extras}
   ${root}/man/${docs}
 
 When you're using a login shell with L<local::lib> enabled

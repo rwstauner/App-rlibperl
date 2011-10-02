@@ -56,7 +56,6 @@ So this:
 Is roughy the equivalent of:
 
   PATH=$HOME/perl5/bin:$PATH perl \
-     -I$HOME/perl5/lib/perl5/x86_64-linux \
      -I$HOME/perl5/lib/perl5 -MSome::Module -e 'do_something'
 
 If that isn't useful enough (it probably isn't)
@@ -73,10 +72,9 @@ If the script is located in a directory named C<bin>
 (or C<script> or C<scripts>)
 it assumes a structure similar to L<local::lib>
 and will first look for
-C<../lib/perl5/$archname> and C<../lib/perl5>:
+C<../lib/perl5>:
 
   ${root}/bin/rlibperl
-  ${root}/lib/perl5/${archname}
   ${root}/lib/perl5
 
 If not found it will check for C<./lib>.
