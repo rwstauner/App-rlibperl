@@ -13,8 +13,14 @@ use Exporter;      # core
 
 our @ISA    = qw( Exporter );
 our @EXPORT = qw(
+  @scripts
   get_inc
   named_tree
+);
+
+our @scripts = qw(
+  rlibperl
+  rbinperl
 );
 
 sub get_inc {
@@ -55,7 +61,7 @@ sub named_tree {
 
   # TODO: $ext = '.pl' if $^O eq 'MSWin32' ?
   my %scripts = map { ($_ => catfile($dir, @$bin, $_)) }
-    qw( rlibperl rbinperl );
+    @scripts;
 
   copy( catfile(@$source, $_), $scripts{$_} )
     for keys %scripts;
