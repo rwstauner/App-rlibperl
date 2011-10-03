@@ -72,8 +72,7 @@ sub named_tree {
   mkpath([values %subdirs]);
 
   my $source = ['bin'];
-  unshift @$source, 'blib'
-    if -d 'blib';
+  # is there a reason to get them out of blib/script ?
 
   # TODO: $ext = '.pl' if $^O eq 'MSWin32' ?
   my %scripts = map { ($_ => catfile($subdirs{bin}, $_)) }
