@@ -12,11 +12,11 @@ package App::rlibperl;
 Install this into a L<local::lib> directory
 to simplify including the C<local::lib> when calling perl:
 
-  # from a shell:
-  $ ~/perl5/bin/rlibperl -MSome::Module -e 'do{ something; }'
-
   # cron job:
-  * * * * * /project/dir/bin/rlibperl -MMod::Name -e1
+  * * * * * /project/dir/bin/rlibperl -MProject::App -e 'run()'
+
+  # program configuration file:
+  command = /home/user/perl5/bin/rlibperl -MSome::Module -e 'do { something; }'
 
 If you're lazy (like me) you can use it in the shebang line:
 
