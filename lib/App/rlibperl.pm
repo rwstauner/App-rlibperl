@@ -100,18 +100,18 @@ please send suggestions!
 
 =begin :list
 
-* L<App::rbinperl>
+* L<App::rbinperl> - included
 
-* L<local::lib>
+* L<local::lib> - The module that makes this one useful.
 
-* L<Devel::Local>
+* L<ylib> (C<perl -Mylib>) - Configurable additional lib directories
 
-* L<ylib> (C<perl -Mylib>)
+* L<Devel::Local> - An alternative to the above modules
 
 =item *
 
-L<rlib> (This module is not related to or dependent on L<rlib>
-but it serves a similar purpose in a different situation.)
+L<rlib> - This module is not related to or dependent on L<rlib>
+but it serves a similar purpose in a different situation.
 
 =end :list
 
