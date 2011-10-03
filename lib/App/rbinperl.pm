@@ -65,8 +65,8 @@ via L<local::lib> your directory tree will look something like this:
 When you're using a login shell with L<local::lib> enabled
 you can just call C<made-up-script> from the shell
 because your environment variables are configured such that
-C<${root}/bin> is in your C<$PATH> and C<${root}/lib/perl5>
-is configured as a directory in C<@INC>.
+C<${root}/bin> is in your C<$PATH> and
+C<${root}/lib/perl5> is in C<$PERL5LIB>.
 
 However to run from any sort of detached process
 the environment variables from L<local::lib> won't be available,
