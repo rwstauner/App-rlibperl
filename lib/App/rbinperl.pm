@@ -7,6 +7,8 @@ package App::rbinperl;
 
 1;
 
+=for :stopwords apache CGI FCGI linux login
+
 =head1 SYNOPSIS
 
 Simplify cron jobs or other places where you specify commands

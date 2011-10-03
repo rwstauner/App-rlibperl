@@ -53,7 +53,7 @@ So this:
 
   $HOME/perl5/bin/rlibperl -MSome::Module -e 'do_something'
 
-Is roughy the equivalent of:
+Is roughly the equivalent of:
 
   PATH=$HOME/perl5/bin:$PATH perl \
      -I$HOME/perl5/lib/perl5 -MSome::Module -e 'do_something'
