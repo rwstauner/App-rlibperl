@@ -7,6 +7,8 @@ package App::rlibperl;
 
 1;
 
+=for :stopwords executables
+
 =head1 SYNOPSIS
 
 Install this into a L<local::lib> directory
