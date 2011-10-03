@@ -29,7 +29,8 @@ Then you don't need to add an explicit
 before any of your other code.
 
 It also uses the environment to find perl
-similar to the typical C<#!/usr/bin/env perl> trick.
+similar to the common C<#!/usr/bin/env perl> trick
+(using the common C<eval 'exec...'\n if 0> trick).
 
 =head1 DESCRIPTION
 
