@@ -24,7 +24,7 @@ Do:
 This is even more useful in a shebang line
 which is often limited to a single argument...
 
-This won't work:
+This won't work on linux:
 
   #!/usr/bin/env perl -I/home/username/perl5/lib/perl5 -S plackup
 
