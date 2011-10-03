@@ -49,13 +49,14 @@ executing perl except that it adds the local lib directories
 to C<@INC> for you.
 
 It also adds the directory of the script to C<$PATH>
-like L<local::lib> does which enable C<system> commands to work.
+like L<local::lib> does which enables C<system>/C<qx>/C<exec>/etc.
+to find executables in that directory.
 
 So this:
 
   $HOME/perl5/bin/rlibperl -MSome::Module -e 'do_something'
 
-Is roughly the equivalent of:
+is roughly the equivalent of:
 
   PATH=$HOME/perl5/bin:$PATH perl \
      -I$HOME/perl5/lib/perl5 -MSome::Module -e 'do_something'
