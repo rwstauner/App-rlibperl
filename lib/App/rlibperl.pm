@@ -16,7 +16,7 @@ to simplify including the C<local::lib> when calling perl:
   * * * * * /project/dir/bin/rlibperl -MProject::App -e 'run()'
 
   # program configuration file:
-  command = /home/user/perl5/bin/rlibperl -MSome::Module -e 'do { something; }'
+  command = /home/username/perl5/bin/rlibperl -MSome::Mod -e 'do { something; }'
 
 If you're lazy (like me) you can use it in the shebang line:
 
