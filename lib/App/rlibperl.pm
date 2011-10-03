@@ -110,10 +110,8 @@ please send suggestions!
 
 =item *
 
-L<rlib>
-
-Note that this module is not related to or dependent on L<rlib>
-but it serves a similar purpose in a different situation.
+L<rlib> (This module is not related to or dependent on L<rlib>
+but it serves a similar purpose in a different situation.)
 
 =end :list
 
