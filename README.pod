@@ -1,5 +1,26 @@
 =head1 App::rlibperl
 
+Simplify calling perl with lib directories relative to the installed script
+automatically added to C<@INC> (useful when installed via L<local::lib>):
+
+  $HOME/perl5/bin/rlibperl -MSome::Module -e 'do_something'
+
+instead of:
+
+  PATH=$HOME/perl5/bin:$PATH perl \
+     -I$HOME/perl5/lib/perl5 -MSome::Module -e 'do_something'
+
+Probably most useful as a shebang to call another script
+(without having to write a wrapper script):
+
+  #!/home/username/perl5/bin/rbinperl plackup
+
+The equivalent
+
+  #!/usr/bin/env perl -I/home/username/perl5/lib/perl5 -S plackup
+
+doesn't work on linux.
+
 See module POD for more information.
 
 =head1 COPYRIGHT AND LICENSE
