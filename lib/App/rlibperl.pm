@@ -25,7 +25,8 @@ If you're lazy (like me) you can use it in the shebang line:
 Then you don't need to add an explicit
 
   use lib '/home/username/perl5/lib/perl5';
-  use local::lib;
+
+before any of your other code.
 
 It also uses the environment to find perl
 similar to the typical C<#!/usr/bin/env perl> trick.
