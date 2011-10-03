@@ -84,4 +84,9 @@ automatically and passing C<-S>:
 Honestly the script itself is much simpler than explaining
 how it can be useful (if it even is useful).
 
+=head1 SEE ALSO
+
+=for :list
+* L<App::rlibperl>
+
 =cut
