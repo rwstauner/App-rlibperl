@@ -116,3 +116,5 @@ sub make_script {
   chmod 0755, $file;
   return $file;
 }
+
+1;
