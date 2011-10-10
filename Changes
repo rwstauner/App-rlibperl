@@ -2,6 +2,9 @@ Revision history for App-rlibperl
 
 {{$NEXT}}
 
+  [Test Fixes]
+  - Change t/lib to look for perl in $PATH before using $^X
+
 0.400     2011-10-03T15:05:57Z
 
   - Initial release

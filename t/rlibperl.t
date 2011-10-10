@@ -6,7 +6,7 @@ use App::rlibperl::Tester;
 use Test::More;
 
 my @tests = (
-  ['local::lib' => [ [qw(lib perl5), $Config{archname}], [qw(lib perl5)] ] ],
+  ['local::lib' => [ [qw(lib perl5), $ARCHNAME], [qw(lib perl5)] ] ],
   [ same   => [ ['lib'] ] ],
   [ parent => [ ['lib'] ] ],
 );
