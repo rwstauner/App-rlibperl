@@ -104,7 +104,7 @@ please send suggestions!
 
 * L<App::rbinperl> - included
 
-* L<local::lib> - The module that makes this one useful.
+* L<local::lib> - The module that makes this one useful
 
 * L<ylib> (C<perl -Mylib>) - Configurable additional lib directories
 
@@ -114,6 +114,18 @@ please send suggestions!
 
 L<rlib> - This module is not related to or dependent on L<rlib>
 but it serves a similar purpose in a different situation.
+
+=item *
+
+L<App::local::lib::helper> - A more configurable alternative to this dist
+that loads L<local::lib> and its environment variables.
+
+The C<localenv> script installed by L<App::local::lib::helper>
+may be more powerful as a shell tool,
+but C<rlibperl> serves a few niches that C<localenv> does not,
+including enabling shebang args and taint mode.
+
+Use the tool that works for you.
 
 =end :list
 
