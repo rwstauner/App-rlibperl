@@ -98,6 +98,65 @@ Lastly it will check for simply C<../lib>.
 If you have another directory structure you think should be supported
 please send suggestions!
 
+=head1 BUGS AND LIMITATIONS
+
+The initial use-case for C<rlibperl> was
+installing via L<local::lib>
+(or without it using something like C<cpanm --local-lib /other/dir>)
+and calling like so:
+
+  $ /path/to/local-lib/rlibperl -perl-args
+
+(It may also be useful in a per-project setting,
+though it's likely easier to make custom scripts
+and/or use the unrelated L<rlib>.)
+
+The following limitations exist when used in other situations,
+however they are considered bugs and may be "fixed" at some point
+(so their functionality should not be relied upon):
+
+=begin :list
+
+=item *
+
+Installing this into a perl's default lib will end up duplicating
+directories in C<@INC> and probably reverse the order of your search path.
+
+This is a problem, but then installing C<rlibperl> into a directory
+that is already in your C<@INC> isn't all that useful.
+
+=item *
+
+It currently always runs via the C<perl> in your C<$PATH>.
+This is expected when run as:
+
+  $ /local/lib/perl5/bin/rlibperl -args
+
+But can be confusing if run as
+
+  $ /other/perl /local/lib/perl5/bin/rlibperl -args
+
+This is because the script uses the C<#!/bin/sh> + C<eval 'exec'> trick
+(see example in L<perlrun>) which is more portable than
+C<#!/usr/bin/env perl>, however perl has the "feature" of processing
+shebangs which means it actually delegates to C</bin/sh> first
+which proceeds to load the perl from the environment.
+
+While this is not ideal and can be confusing,
+specifiying the full paths to perl and C<rlibperl>
+doesn't seem all that useful either:
+
+  $ /other/perl /local/lib/perl5/bin/rlibperl -args
+
+compared to:
+
+  $ /other/perl -I/local/lib/perl5/lib/perl5 -args
+
+=end :list
+
+If you think the above situations I<would> be useful
+please submit rationale (or B<patches>).
+
 =head1 SEE ALSO
 
 =begin :list
