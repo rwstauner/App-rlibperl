@@ -41,7 +41,7 @@ our @structures = qw(
 
 # find 'perl' in $PATH; if not found use $^X.
 our ($PERL, $ARCHNAME) = system(qw(perl -e 1)) == 0
-  ? ('perl', scalar qx'perl -MConfig -e "print \$Config{archname}"')
+  ? ('perl', scalar qx/perl -MConfig -e "print \$::Config{archname}"/)
   : ($^X, $Config{archname});
 
 chomp($ARCHNAME); # just in case
