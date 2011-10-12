@@ -1,8 +1,5 @@
-#!/bin/sh
-#! -*-perl-*- # vim: set ts=2 sts=2 sw=2 expandtab smarttab ft=perl:
-eval 'exec perl -x -wS $0 ${1+"$@"}'
-  if 0;
-
+#!/usr/bin/env perl
+# vim: set ts=2 sts=2 sw=2 expandtab smarttab ft=perl:
 # PODNAME: rbinperl
 # ABSTRACT: Execute perl using relative lib and assuming -S
 

@@ -127,35 +127,15 @@ that is already in your C<@INC> isn't all that useful.
 
 =item *
 
-It currently always runs via the C<perl> in your C<$PATH>.
-This is expected when run as:
-
-  $ /local/lib/perl5/bin/rlibperl -args
-
-But can be confusing if run as
-
-  $ /other/perl /local/lib/perl5/bin/rlibperl -args
-
-This is because the script uses the C<#!/bin/sh> + C<eval 'exec'> trick
-(see example in L<perlrun>) which is more portable than
-C<#!/usr/bin/env perl>, however perl has the "feature" of processing
-shebangs which means it actually delegates to C</bin/sh> first
-which proceeds to load the perl from the environment.
-
-While this is not ideal and can be confusing,
-specifiying the full paths to perl and C<rlibperl>
-doesn't seem all that useful either:
-
-  $ /other/perl /local/lib/perl5/bin/rlibperl -args
-
-compared to:
-
-  $ /other/perl -I/local/lib/perl5/lib/perl5 -args
+The scripts use the shebang C<#!/usr/bin/env perl>
+which is not entirely portable,
+but seemed less problematic and more predictable
+than the C<#!/bin/sh> + C<eval 'exec'> trick.
 
 =end :list
 
-If you think the above situations I<would> be useful
-please submit rationale (or B<patches>).
+If you think other functionality would be useful
+please submit examples, rationale, or B<patches>.
 
 =head1 SEE ALSO
 
