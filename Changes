@@ -2,8 +2,11 @@ Revision history for App-rlibperl
 
 {{$NEXT}}
 
-  [Test Fixes]
-  - Change t/lib to look for perl in $PATH before using $^X
+  - Change script shebangs from "bin/sh\neval exec" to "env perl"
+  - Fixes for Windows
+  - Document bugs and compare to App::local::lib::helper
+  - Fix tests to look for perl in $PATH before using $^X
+  - Test STDIN pipe
 
 0.400     2011-10-03T15:05:57Z
 
