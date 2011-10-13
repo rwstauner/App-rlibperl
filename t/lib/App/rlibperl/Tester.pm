@@ -81,13 +81,16 @@ sub named_tree {
   mkpath([values %subdirs]);
 
   my $source = ['bin'];
-  # is there a reason to get them out of blib/script ?
+  $source = [qw(blib script)] if -d 'blib';
 
-  # TODO: $ext = '.pl' if $^O eq 'MSWin32' ?
-  my %scripts = map { ($_ => catfile($subdirs{bin}, $_)) }
+  my $ext =
+    $^O eq 'MSWin32' ? '.bat' :
+    '';
+
+  my %scripts = map { ($_ => catfile($subdirs{bin}, $_.$ext)) }
     @scripts;
 
-  copy( catfile(@$source, $_), $scripts{$_} )
+  copy( catfile(@$source, $_.$ext), $scripts{$_} )
     for keys %scripts;
 
   chmod 0755, values %scripts;

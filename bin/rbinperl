@@ -12,8 +12,9 @@ use File::Spec::Functions qw( catdir catpath splitdir splitpath ); # core
 my ($vol, $dirs, $file) = splitpath($FindBin::Bin, 1);
 my $perl = catpath($vol, $dirs, 'rlibperl');
 
+$perl .= '.bat' if $^O eq 'MSWin32';
+
 # re-invoke perl with the -S
-# FIXME: is this portable?  maybe we need to exec $^X, $rlibperl, -S, @ARGV
 exec($perl, '-S', @ARGV);
 die "Failed to execute '$perl': $!";
 
