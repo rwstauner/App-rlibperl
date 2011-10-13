@@ -81,4 +81,4 @@ else {
 
 =for :list
 * L<App::rlibperl> for documentation
-* L<App::rbinperl> which uses this script to execute another perl script in the same directory
+* L<App::rbinperl> Execute perl using relative lib and assuming -S
