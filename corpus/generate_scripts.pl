@@ -119,7 +119,7 @@ $ENV{PATH} = $FindBin::Bin . $Config{path_sep} . $ENV{PATH};
 
 @inc = map { $_ = Win32::GetShortPathName($_); s-\\-/-g; $_ } @inc if $^O eq 'MSWin32';
 
-# re-invoke perl with the the lib dirs prepended
+# re-invoke perl with the lib dirs prepended
 my @exec = ($perl, (map { '-I' . $_ } @inc), {{argv}});
 
 # exec() seems unreliable on windows... system() seems to work
