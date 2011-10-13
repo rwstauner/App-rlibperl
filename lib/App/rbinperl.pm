@@ -45,8 +45,9 @@ The C<rbinperl> script simplifies the execution of
 a perl script that depends on modules located in 
 relative library directories.
 
-This uses L<App::rlibperl> to prepend relative lib directories
-to C<@INC> and additionally passes the C<-S> argument to perl.
+This uses the same logic as L<App::rlibperl>
+to prepend relative lib directories to C<@INC> and
+additionally passes the C<-S> argument to perl.
 This causes perl to search the C<$PATH>
 (which now contains the directory where C<rbinperl> was found)
 for the specified script.
