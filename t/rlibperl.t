@@ -18,7 +18,11 @@ foreach my $test ( @tests ) {
   my $tree = named_tree( $structure );
 
   my @def = get_inc();
-  my @ext = map { catdir($tree->{root}, @$_) } @$dirs;
+
+  my @ext = $^O eq 'MSWin32'
+    ? map { $_ = catdir(Win32::GetShortPathName($tree->{root}), @$_); s-\\-/-g; $_ } @$dirs
+    : map { catdir($tree->{root}, @$_) } @$dirs;
+
   my @got = get_inc($tree->{rlibperl});
 
   is_deeply(

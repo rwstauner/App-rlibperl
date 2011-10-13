@@ -62,8 +62,12 @@ if ($^O ne 'VMS') {
 # put current bin in path so perl -S will find it
 $ENV{PATH} = $FindBin::Bin . $Config{path_sep} . $ENV{PATH};
 
+@inc = map { $_ = Win32::GetShortPathName($_); s-\\-/-g; $_ } @inc if $^O eq 'MSWin32';
+
+my @exec = ($perl, (map { '-I' . $_ } @inc), @ARGV);
+
 # re-invoke perl with the the lib dirs prepended
-exec($perl, (map { '-I' . $_ } @inc), @ARGV);
+exec(@exec);
 die "Failed to execute '$perl': $!";
 
 # IDEA: similar to ylib, could read a ~/.file for extra paths to include, possibly multiple keyed on location of script
