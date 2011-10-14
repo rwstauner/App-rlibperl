@@ -33,7 +33,7 @@ MOD
 
   my $interp = 'sillyinterp';
   make_script([$tree->{bin}, $interp], <<SCRIPT);
-#!$^X
+#!$PERL
 use strict;
 use warnings;
 use Silly_Interp;
