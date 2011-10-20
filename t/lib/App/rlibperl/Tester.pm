@@ -5,6 +5,7 @@ package # no_index
 use strict;
 use warnings;
 use Config;        # core
+use Cwd        qw( realpath ); # core
 use FindBin;       # core
 use File::Copy qw( copy ); # core
 use File::Spec::Functions qw( catfile catdir ); # core
@@ -25,6 +26,7 @@ our @EXPORT = qw(
   make_file
   make_script
   named_tree
+  realpath
   tempdir
 );
 
@@ -55,6 +57,10 @@ sub get_inc {
 sub named_tree {
   my ($name) = @_;
   my $dir = tempdir( CLEANUP => 1 );
+
+  # resolve symlinks from /tmp -> /private/tmp
+  $dir = realpath($dir)
+    if $^O eq 'darwin';
 
   my %subdirs;
   if ( $name eq 'local::lib' ) {
