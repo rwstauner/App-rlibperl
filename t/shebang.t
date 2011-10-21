@@ -43,7 +43,7 @@ while(<>){
 SCRIPT
 
   # put script somewhere separate
-  my $scriptdir = tempdir( UNLINK => 1 );
+  my $scriptdir = tempdir( CLEANUP => 1 );
   my $script = make_script([$scriptdir, 'silly'], <<SCRIPT);
 #!$tree->{rbinperl} sillyinterp
 foo()
