@@ -43,10 +43,10 @@ our @structures = qw(
 
 # find 'perl' in $PATH; if not found use $^X.
 our ($PERL, $ARCHNAME) = system(qw(perl -e 1)) == 0
-  ? ('perl', scalar qx/perl -MConfig -e "print \$::Config{archname}"/)
+  ? (qx/perl -MConfig -e "print qq[\$^X\n\$::Config{archname}\n]"/)
   : ($^X, $Config{archname});
 
-chomp($ARCHNAME); # just in case
+chomp($PERL, $ARCHNAME); # just in case
 
 sub get_inc {
   my $perl = shift || $PERL;
