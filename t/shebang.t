@@ -5,15 +5,22 @@ use lib 't/lib';
 use App::rlibperl::Tester;
 use Test::More;
 
-plan skip_all => "Testing shebangs not supported on $^O"
-  # this list could be much longer and more complicated
-  if $^O !~ /
-      linux
-    | bsd
-    | darwin
-    | cygwin
-    | solaris
-  /x;
+{
+  my $dir = tempdir( CLEANUP => 1 );
+  my $parent = make_script([$dir, 'parent'], <<SCRIPT);
+#!$PERL
+print "parent";
+do \$ARGV[0] if \@ARGV;
+SCRIPT
+
+  my $child  = make_script([$dir, 'child' ], <<SCRIPT);
+#!$parent
+print "child";
+SCRIPT
+
+  plan skip_all => "Nested shebangs not supported on $^O"
+    unless qx/$child/ eq "parentchild";
+}
 
 plan tests => scalar @structures;
 
