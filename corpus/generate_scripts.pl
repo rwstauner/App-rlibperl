@@ -52,7 +52,6 @@ generate_script($_) for keys %$vars;
 
 __DATA__
 #!/usr/bin/env perl
-# vim: set ts=2 sts=2 sw=2 expandtab smarttab filetype=perl:
 # PODNAME: {{name}}
 # ABSTRACT: {{abstract}}
 
