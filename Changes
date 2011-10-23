@@ -2,6 +2,8 @@ Revision history for App-rlibperl
 
 {{$NEXT}}
 
+0.700     2011-10-23T04:02:47Z
+
   - Embed path of installing perl into script shebangs (via EUMM)
     instead of using '#!/usr/bin/env perl'.
 
