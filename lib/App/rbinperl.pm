@@ -85,6 +85,52 @@ automatically and passing C<-S>:
 Honestly the script itself is much simpler than explaining
 how it can be useful (if it even is useful).
 
+=head1 USE CASE
+
+=head2 SHARED HOSTING
+
+One of the reasons for creating this dist was to
+make it as easy as possible to install a modern perl web framework
+into a shared hosting environment.
+
+You can build a web application and use L<Plack>
+to run it as C<fastcgi> through Apache
+(a common shared hosting option).
+
+For example you could put this in C<dispatch.fcgi>:
+
+  #!/usr/bin/env plack
+  require 'mywebapp.pl';
+
+and Apache would run your perl script through plack
+which would detect an C<FCGI> environment and then load your web app.
+
+If plack and your web framework are installed into a local lib
+this won't work.  Instead you can do this:
+
+  #!/home/username/perl5/bin/rbinperl plackup
+  require 'mywebapp.pl';
+
+It's almost as easy, and makes the rest
+(loading your local lib) transparent.
+
+=head1 BUGS AND LIMITATIONS
+
+Unfortunately the shebang described above isn't entirely portable.
+
+If you are on an operating system that doesn't allow
+using another script (as opposed to a binary) in the shebang,
+you may be able to use a work around like this instead:
+
+  #!/bin/sh
+  eval 'exec perl /home/username/perl5/bin/rbinperl plackup $0 ${1+"$@"}'
+    if 0;
+  require 'mywebapp.pl';
+
+It's a slight variation of a common perl/shebang idiom.
+
+See L<App::rlibperl/BUGS AND LIMITATIONS> for more.
+
 =head1 SEE ALSO
 
 =for :list
