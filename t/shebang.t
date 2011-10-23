@@ -12,14 +12,14 @@ my $exec_if_shell =
 # try a quick interpreter shebang to see if it appears to be supported
 {
   my $dir = tempdir( CLEANUP => 1 );
-  my $parent = make_script([$dir, 'parent'], <<SCRIPT);
+  my $parent = make_script([$dir, 'parent.pl'], <<SCRIPT);
 #!$PERL
 $exec_if_shell
 print "parent";
 do \$ARGV[0] if \@ARGV;
 SCRIPT
 
-  my $child  = make_script([$dir, 'child' ], <<SCRIPT);
+  my $child  = make_script([$dir, 'child.pl' ], <<SCRIPT);
 #!$parent
 $exec_if_shell
 print "child";
@@ -45,7 +45,7 @@ sub parse {
 1;
 MOD
 
-  my $interp = 'sillyinterp';
+  my $interp = 'sillyinterp.pl';
   make_script([$tree->{bin}, $interp], <<SCRIPT);
 #!$PERL
 $exec_if_shell
@@ -59,10 +59,10 @@ SCRIPT
 
   # put script somewhere separate
   my $scriptdir = tempdir( CLEANUP => 1 );
-  my $script = make_script([$scriptdir, 'silly'], <<SCRIPT);
-#!$tree->{rbinperl} sillyinterp
+  my $script = make_script([$scriptdir, 'silly.pl'], <<SCRIPT);
+#!$tree->{rbinperl} $interp
 # OSes that use this exec will require repeating the shebang files:
-eval 'exec $PERL $tree->{rbinperl} sillyinterp \$0 \${1+"\$@"}'
+eval 'exec $PERL $tree->{rbinperl} $interp \$0 \${1+"\$@"}'
   if 0;
 foo()
 narf.
