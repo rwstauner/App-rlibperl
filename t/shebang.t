@@ -5,6 +5,12 @@ use lib 't/lib';
 use App::rlibperl::Tester;
 use Test::More;
 
+# don't even bother with these:
+plan skip_all => "Testing shebangs not supported on $^O"
+  if $^O =~ /
+      MSWin32
+  /x;
+
 my $exec_if_shell =
   # avoid -S for portability; we're using full paths, anyway
   sprintf(q<eval 'exec %s $0 ${1+"$@"}'%s>, $PERL, "\n  if 0;");
