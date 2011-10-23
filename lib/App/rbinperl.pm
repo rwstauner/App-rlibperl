@@ -87,6 +87,8 @@ how it can be useful (if it even is useful).
 
 =head1 USE CASE
 
+=for :stopwords plack
+
 =head2 SHARED HOSTING
 
 One of the reasons for creating this dist was to
