@@ -121,6 +121,23 @@ directories in C<@INC> and probably reverse the order of your search path.
 This is a problem, but then installing C<rlibperl> into a directory
 that is already in your C<@INC> isn't all that useful.
 
+=item *
+
+Using these scripts in the shebang is arguably the most useful
+way to use them (and in fact the reason they were created).
+
+Unfortunately shebangs aren't always portable.
+
+Some systems don't allow using another script
+(as opposed to a binary) in the shebang line.
+You can work around this
+by adding a slight variation of the common C<eval 'exec'> idiom.
+Just insert what would have been your shebang into the exec arguments:
+
+  #!/bin/sh
+  eval 'exec perl /home/username/perl5/bin/rlibperl -S $0 ${1+"$@"}'
+    if 0;
+
 =end :list
 
 If you think other functionality would be useful
