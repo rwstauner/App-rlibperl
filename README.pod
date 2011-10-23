@@ -17,7 +17,7 @@ Probably most useful as a shebang to call another script
 
 The equivalent
 
-  #!/usr/bin/env perl -I/home/username/perl5/lib/perl5 -S plackup
+  #!/usr/local/bin/perl -I/home/username/perl5/lib/perl5 -S plackup
 
 doesn't work on linux.
 

@@ -1,4 +1,4 @@
-#!/usr/bin/env perl
+#!/usr/local/bin/perl
 # vim: set ts=2 sts=2 sw=2 expandtab smarttab:
 
 use strict;
@@ -51,7 +51,7 @@ generate_script($_) for keys %$vars;
 # IDEA: similar to ylib, could read a ~/.file for extra paths to include, possibly multiple keyed on location of script
 
 __DATA__
-#!/usr/bin/env perl
+#!/usr/local/bin/perl
 # PODNAME: {{name}}
 # ABSTRACT: {{abstract}}
 

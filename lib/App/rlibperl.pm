@@ -30,10 +30,6 @@ Then you don't need to add an explicit
 
 before any of your other code.
 
-It also uses the environment to find perl
-similar to the common C<#!/usr/bin/env perl> trick
-(using the common C<eval 'exec...'\n if 0> trick).
-
 =head1 DESCRIPTION
 
 The C<rlibperl> script simplifies the inclusion of
@@ -124,13 +120,6 @@ directories in C<@INC> and probably reverse the order of your search path.
 
 This is a problem, but then installing C<rlibperl> into a directory
 that is already in your C<@INC> isn't all that useful.
-
-=item *
-
-The scripts use the shebang C<#!/usr/bin/env perl>
-which is not entirely portable,
-but seemed less problematic and more predictable
-than the C<#!/bin/sh> + C<eval 'exec'> trick.
 
 =end :list
 

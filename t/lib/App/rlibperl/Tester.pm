@@ -41,12 +41,19 @@ our @structures = qw(
   parent
 );
 
-# find 'perl' in $PATH; if not found use $^X.
-our ($PERL, $ARCHNAME) = system(qw(perl -e 1)) == 0
-  ? (qx/perl -MConfig -e "print qq[\$^X\n\$::Config{archname}\n]"/)
-  : ($^X, $Config{archname});
+# NOTE: this requires the script shebangs to match $^X
+# (which EUMM will do when copying them to blib/
 
-chomp($PERL, $ARCHNAME); # just in case
+our $PERL = do {
+  # see perldoc description of perlvar $^X
+  my $perl = $Config{perlpath};
+  if ($^O ne 'VMS') {
+    $perl .= $Config{_exe}
+      unless $perl =~ m/$Config{_exe}$/i;
+  }
+  $perl;
+};
+our $ARCHNAME = $Config{archname};
 
 sub get_inc {
   my $perl = shift || $PERL;
